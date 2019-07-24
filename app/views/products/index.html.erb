@@ -1,1 +1,9 @@
-<h1>Welcome to my Final Web App</h1>
+<%= @products.each do |product| %>
+  <div>
+    <h1><%= product.name %></h1><br />
+    <p><%= product.description %></p><br />
+    <p><%= product.cost %></p><br />
+  </div>
+
+  <hr />
+<% end %>

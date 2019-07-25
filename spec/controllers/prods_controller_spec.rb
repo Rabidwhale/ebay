@@ -25,5 +25,12 @@ RSpec.describe ProdsController, type: :controller do
       expect(prod.description).to eq("airpods")
       expect(prod.cost).to eq(0.1e3)
     end
-  end  
+
+    it "should properly deal with validation errors" do
+      post :create, params: { prod: { name: '', description: '', cost: '' } }
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(Prod.count).to eq 0
+    end
+  end
+
 end

@@ -8,7 +8,11 @@ class ProdsController < ApplicationController
 
   def create
     @prod = Prod.create(prod_params)
-    redirect_to root_path
+    if @prod.valid?
+      redirect_to root_path
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   private

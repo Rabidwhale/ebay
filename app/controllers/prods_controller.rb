@@ -1,4 +1,6 @@
 class ProdsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
+  
   def new
     @prod = Prod.new
   end
@@ -7,7 +9,7 @@ class ProdsController < ApplicationController
   end
 
   def create
-    @prod = Prod.create(prod_params)
+    @prod = current_user.prods.create(prod_params)
     if @prod.valid?
       redirect_to root_path
     else

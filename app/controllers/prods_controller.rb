@@ -1,11 +1,18 @@
 class ProdsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
-  
+
   def new
     @prod = Prod.new
   end
 
   def index
+  end
+
+  def show
+    @prod = Prod.find_by_id(params[:id])
+    if @prod.blank?
+      render plain: 'Not found :(', status: :not_found
+    end
   end
 
   def create

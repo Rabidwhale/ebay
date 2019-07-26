@@ -1,6 +1,13 @@
 class ProdsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
+  def destroy
+    @prod = Prod.find_by_id(params[:id])
+    return render_not_found if @prod.blank?
+    @prod.destroy
+    redirect_to root_path
+  end
+
   def update
     @prod = Prod.find_by_id(params[:id])
     return render_not_found if @prod.blank?

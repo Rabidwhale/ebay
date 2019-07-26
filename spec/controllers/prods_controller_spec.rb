@@ -1,6 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe ProdsController, type: :controller do
+  describe "prods#destroy action" do
+    it "should allow a user to destroy prods" do
+      prod = FactoryBot.create(:prod)
+      delete :destroy, params: { id: prod.id }
+      expect(response).to redirect_to root_path
+      prod = Prod.find_by_id(prod.id)
+      expect(prod).to eq nil   
+    end
+
+    it "should return a 404 message if we cannot find a prod with the id that is specified" do
+      delete :destroy, params: { id: 'SPACEDUCK' }
+      expect(response).to have_http_status(:not_found)
+    end
+  end
+
   describe "prods#update action" do
     it "should allow users to successfully update prods" do
       prod = FactoryBot.create(:prod, name: "Initial Value", description: "Initial Value", cost: "Initial Value")

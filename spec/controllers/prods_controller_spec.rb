@@ -1,6 +1,46 @@
 require 'rails_helper'
 
 RSpec.describe ProdsController, type: :controller do
+  describe "prods#update action" do
+    it "should allow users to successfully update prods" do
+      prod = FactoryBot.create(:prod, name: "Initial Value", description: "Initial Value", cost: "Initial Value")
+      patch :update, params: { id: prod.id, prod: { name: 'Changed', description: 'Changed', cost: 'Changed' } }
+      expect(response).to redirect_to root_path
+      prod.reload
+      expect(prod.name).to eq "Changed"
+      expect(prod.description).to eq "Changed"
+      expect(prod.cost).to eq 0.0
+    end
+
+    it "should have http 404 error if the prod cannot be found" do
+      patch :update, params: { id: "YOLOSWAG", prod: { name: 'Changed', description: 'Changed', cost: 'Changed' } }
+      expect(response).to have_http_status(:not_found)
+    end
+
+    it "should render the edit form with an https status of unprocessable_entity" do
+      prod = FactoryBot.create(:prod, name: "Initial Value", description: "Initial Value", cost: "Initial Value")
+      patch :update, params: { id: prod.id, prod: { name: '', description: '', cost: '' } }
+      expect(response).to have_http_status(:unprocessable_entity)
+      prod.reload
+      expect(prod.name).to eq "Initial Value"
+      expect(prod.description).to eq "Initial Value"
+      expect(prod.cost).to eq 0.0
+    end
+  end
+
+  describe "prods#edit action" do
+    it "should successfully show the edit form if the prod is found" do
+      prod = FactoryBot.create(:prod)
+      get :edit, params: { id: prod.id }
+      expect(response).to have_http_status(:success)
+    end
+
+    it "should return a 404 error message if the prod is not found" do
+      get :edit, params: { id: 'SWAG' }
+      expect(response).to have_http_status(:not_found)
+    end
+  end
+
   describe "prods#show action" do
     it "should successfully show the page if the prod is found" do
       prod = FactoryBot.create(:prod)

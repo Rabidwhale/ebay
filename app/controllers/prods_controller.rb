@@ -27,6 +27,7 @@ class ProdsController < ApplicationController
   end
 
   def index
+    @prods = Prod.all
   end
 
   def show
@@ -60,5 +61,5 @@ class ProdsController < ApplicationController
   def render_not_found(status=:not_found)
     render plain: '#{status.to_s.titlesize} :(', status: status
   end
-  
+
 end

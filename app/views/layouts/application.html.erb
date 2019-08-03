@@ -10,21 +10,46 @@
   </head>
 
   <body>
-    <% if current_user %>
-      You're signed in as <%= current_user.email %>.
-      <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-    <% else %>
-      <%= link_to "Sign In", new_user_session_path %>
-      <%= link_to "Sign Up", new_user_registration_path %>
-    <% end %>
-    <% if notice.present? %>
-      <p class="notice"><%= notice %></p>
-    <% end %>
+    <div id="flex-content-container">
+      <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">Ebay Clone</a>
 
-    <% if alert.present? %>
-      <p class="alert"><%= alert %></p>
-    <% end %>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+              <% if current_user %>
+                You're signed in as <%= current_user.email %>.
+                <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+              <% else %>
+                <%= link_to "Sign In", new_user_session_path %>
+                <%= link_to "Sign Up", new_user_registration_path %>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
-    <%= yield %>
+      <% if notice.present? %>
+        <p class="notice"><%= notice %></p>
+      <% end %>
+
+      <% if alert.present? %>
+        <p class="alert"><%= alert %></p>
+      <% end %>
+
+      <%= yield %>
+    </div>
+
+    <div id="footer">
+      <div class="container">
+        <b>Footer Here</b>
+        <br />
+        <%= link_to 'Link', '#' %>
+      </div>
+    </div>
   </body>
 </html>

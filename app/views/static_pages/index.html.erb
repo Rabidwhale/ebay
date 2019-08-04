@@ -10,27 +10,11 @@
 </div>
 <br />
 <div class="row featuretext-center">
-  <div class="booyah-box col-12 col-sm">
-    <h3>Electronics</h3>
-  </div>
-
-  <div class="col-12 col-sm">
-    <h3>Kitchen and Homeware</h3>
-  </div>
-
-  <div class="col-12 col-sm">
-    <h3>Sports</h3>
-  </div>
-
-  <div class="col-12 col-sm">
-    <h3>Art</h3>
-  </div>
-
-  <div class="col-12 col-sm">
-    <h3>Toys and Stuff</h3>
-  </div>
-
-  <div class="col-12 col-sm">
-    <h3>Car Stuff</h3>
-  </div>
+  <% @categories.each do |category| %>
+    <div class="booyah-box col-12 col-sm">
+      <h3><%= category.name %></h3>
+      <br />
+      <%= link_to 'Check it Out', category %>
+    </div>
+  <% end %>
 </div>

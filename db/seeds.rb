@@ -3,5 +3,12 @@
 #
 # Examples:
 #
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+user = User.first or raise "Must Create a User First"
+categories = Category.create!([{ name: 'Electronics' }, { name: 'Art' }, { name: 'Car Stuff'}, { name: 'Toys'}, { name: 'Appliances'}, { name: 'Sports'}])
+categories.each do |category|
+  Prod.create!([
+    {name: Faker::Commerce.product_name, description: Faker::Marketing.buzzwords, cost: Faker::Commerce.price, category_id: category.id, user_id: user.id}, 
+    {name: Faker::Commerce.product_name, description: Faker::Marketing.buzzwords, cost: Faker::Commerce.price, category_id: category.id, user_id: user.id}, 
+    {name: Faker::Commerce.product_name, description: Faker::Marketing.buzzwords, cost: Faker::Commerce.price, category_id: category.id, user_id: user.id} 
+  ])
+end

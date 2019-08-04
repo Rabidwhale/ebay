@@ -1,7 +1,24 @@
 @import "bootstrap";
 
+.booyah-box {
+  -moz-box-shadow: 1px 1px 2px 0 #d0d0d0;
+  -webkit-box-shadow: 1px 1px 2px 0 #d0d0d0;
+  box-shadow: 1px 1px 2px 0 #d0d0d0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-color: #e4e4e4 #bebebd #bebebd #e4e4e4;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  padding: 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin:0;
+  padding:0;
+}
+
 .hero {
-  background: image_url('/app/assets/image/hero.jpg') no-repeat center center fixed;
+  background: image-url('hero.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -41,31 +58,3 @@ body {
   font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
 }
 
-html {
-  height: 100%;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-#flex-content-container {
-  flex: 1;
-}
-
-#footer {
-  position: 100%;
-  width: 100px;
-  background-color: rgba(36, 32, 33, 0.9);
-  color: white;
-  font-family: "Helvetica Neue", Helvetica;
-  padding: 10px 0px;
-  margin-top: 30px;
-}
-
-#footer a {
-  color: white;
-  font-weight: 100;
-}

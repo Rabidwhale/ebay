@@ -1,1 +1,11 @@
-<hi><%= @prods.inspect %></hi>
+<h1>Products</h1>
+<ul>
+  <% @prods.each do |prod| %>
+    <li>
+      <%= link_to prod.name, prod %>
+    </li>
+  <% end %>
+</ul>
+<br />
+<%= link_to 'new Products', new_prod_path %>
+

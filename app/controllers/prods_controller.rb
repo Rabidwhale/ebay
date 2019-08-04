@@ -24,6 +24,7 @@ class ProdsController < ApplicationController
 
   def new
     @prod = Prod.new
+    @categories = Category.all
   end
 
   def index
@@ -46,7 +47,7 @@ class ProdsController < ApplicationController
   def create
     @prod = current_user.prods.create(prod_params)
     if @prod.valid?
-      redirect_to root_path
+      redirect_to prods_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -55,7 +56,7 @@ class ProdsController < ApplicationController
   private
 
   def prod_params
-    params.require(:prod).permit(:name, :description, :cost)
+    params.require(:prod).permit(:name, :description, :cost, :category_id)
   end
 
   def render_not_found(status=:not_found)

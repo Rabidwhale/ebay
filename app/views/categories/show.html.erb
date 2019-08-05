@@ -4,10 +4,12 @@
 <h2>Products</h2>
 <ul>
   <% @prods.each do |prod| %>
-    <li>
-      <%= link_to prod.name, prod %>
-    </li>
+    <div class="booyah-box col-10 offset-1">
+      <li>
+        <h3><%= link_to prod.name, prod %></h3><br />
+        <p><% prod.description %></p><br />
+      </li>
+    </div>
   <% end %>
 </ul>
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+

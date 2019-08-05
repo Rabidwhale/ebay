@@ -5,7 +5,14 @@
   <div class="float-right">
     <% if current_user && current_user == @prod.user %>
       <%= link_to 'Edit', edit_prod_path(@prod), class: 'btn btn-primary' %>
+
+      <%= link_to 'Take Off the Market', prod_path(@prod), method: :delete, data: {confirm: 'Are you positive you do not wanna sell this?'},class: 'btn btn-danger' %>
     <% end %>
-    <%= link_to 'Take Off the Market', prod_path(@prod), method: :delete, data: {confirm: 'Are you positive you do not wanna sell this?'},class: 'btn btn-danger' %>
   </div>
+  <div class="clear"></div>
+  <%= simple_form_for @comment, url: '#' do |f| %>
+    <%= f.input :message %>
+    <%= f.input :rating %>
+    <%= f.submit "Add a Comment", class: 'btn btn-primary' %>
+  <% end %>
 </div>

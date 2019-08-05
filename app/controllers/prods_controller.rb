@@ -33,6 +33,7 @@ class ProdsController < ApplicationController
 
   def show
     @prod = Prod.find_by_id(params[:id])
+    @comment = Comment.new
     if @prod.blank?
       return render_not_found if @prod.blank?
     end

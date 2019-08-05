@@ -1,6 +1,10 @@
-<%= simple_form_for @prod do |f| %>
-  <%= f.input :name %>
-  <%= f.input :description %>
-  <%= f.input :cost %>
-  <%= f.submit %>
-<% end %>
+<div class="booyah-box col-10 offset-1">
+  <h1>Edit Your Product</h1>
+  <%= simple_form_for @prod do |f| %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :cost %>
+    <br />
+    <%= f.submit 'Update', class: 'btn btn-primary' %>
+  <% end %>
+</div>

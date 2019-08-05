@@ -2,4 +2,8 @@
   <h1><%= @prod.name %></h1>
   <br /><br />
   <p><<%= @prod.description %></p>
-</div
+  <div class="float-right">
+    <%= link_to 'Edit', edit_prod_path(@prod), class: 'btn btn-primary' %>
+    <%= link_to 'Take Off the Market', prod_path(@prod), method: :delete, data: {confirm: 'Are you positive you do not wanna sell this?'},class: 'btn btn-danger' %>
+  </div>
+</div>

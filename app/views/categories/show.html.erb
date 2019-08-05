@@ -9,6 +9,18 @@
         <h3><%= link_to prod.name, prod %></h3><br />
         <p><% prod.description %></p><br />
       </li>
+
+      <% if prod.comments.present? %>
+        <div class="col-12">
+          <blockquote>
+            <% if prod.comments.last.humanized_rating.present? %>
+              <b><%= prod.comments.last.humanized_rating %></b> -
+            <% end %>
+            <%= prod.comments.last.message %>
+            <small><%= prod.comments.last.user.email %></small>
+          </blockquote>
+        </div>
+      <% end %>
     </div>
   <% end %>
 </ul>

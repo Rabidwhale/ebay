@@ -1,7 +1,12 @@
 <div class="booyah-box col-10 offset-1">
   <h1><%= @prod.name %></h1>
   <br /><br />
-  <p><<%= @prod.description %></p>
+  <p><%= @prod.description %></p>
+  <ul>
+    <% @prod.images.each do |image| %>
+      <li><%= image_tag image.url %></li>
+    <% end %>
+  </ul>
   <div class="float-right">
     <% if current_user && current_user == @prod.user %>
       <%= link_to 'Edit', edit_prod_path(@prod), class: 'btn btn-primary' %>
@@ -10,24 +15,52 @@
     <% end %>
   </div>
   <div class="clear"></div>
-  <%= simple_form_for @comment, url: prod_comments_path(@prod) do |f| %>
-    <%= f.input :message %>
-    <%= f.input :rating, as: :select, collection: Comment::RATINGS %>
 
-    <%= f.submit "Add a Comment", class: 'btn btn-primary' %>
-  <% end %>
-
-  <h1>Comments</h1>
-
-  <% @prod.comments.each do |comment| %>
-    <div>
-      <blockquote>
-        <% if comment.humanized_rating.present? %>
-          <b><%= comment.humanized_rating %></b> -
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Add a comment</h4>
+        </div>
+        <%= simple_form_for @comment, url: prod_comments_path(@prod) do |f| %>
+          <div class="modal-body">
+            <%= f.input :message %>
+            <%= f.input :rating, as: :select, collection: Comment::RATINGS %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <%= f.submit "Add a Comment", class: 'btn btn-primary' %>
+          </div>
         <% end %>
-        <%= comment.message %>
-        <small><%= comment.user.email %></small>
-      </blockquote>
+      </div>
     </div>
-  <% end %>
+  </div>
+
+  <div class="col-10 offset-1">
+    <h1 class="float-left">Comments</h1>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+      Add a comment
+    </button>
+  </div>
+
+  <div class="clear"></div>
+
+  <div class="row">
+    <% @prod.comments.each do |comment| %>
+      <div class="col-12 col-sm-6">
+        <blockquote>
+          <% if comment.humanized_rating.present? %>
+            <b><%= comment.humanized_rating %></b> -
+          <% end %>
+          <%= comment.message %>
+          <small><%= comment.user.email %></small>
+        </blockquote>
+      </div>
+    <% end %>
+  </div>
 </div>

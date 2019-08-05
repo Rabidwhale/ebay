@@ -13,7 +13,7 @@ class ProdsController < ApplicationController
     @prod = Prod.find_by_id(params[:id])
     return render_not_found if @prod.blank?
     return render_not_found(:forbidden) if @prod.user != current_user
-
+    
     @prod.update_attributes(prod_params)
     if @prod.valid?
       redirect_to root_path
@@ -57,7 +57,7 @@ class ProdsController < ApplicationController
   private
 
   def prod_params
-    params.require(:prod).permit(:name, :description, :cost, :category_id)
+    params.require(:prod).permit(:name, :description, :cost, :category_id, images: [])
   end
 
   def render_not_found(status=:not_found)

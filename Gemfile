@@ -84,3 +84,6 @@ gem 'carrierwave', '>= 2.0.0.rc', '< 3.0'
 gem 'stripe'
 
 gem 'figaro'
+
+gem 'will_paginate', '>= 3.1'
+gem 'will_paginate-bootstrap'

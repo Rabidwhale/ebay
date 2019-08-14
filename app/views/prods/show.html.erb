@@ -1,5 +1,5 @@
 <div class="booyah-box col-10 offset-1">
-  <h1><%= @prod.name %></h1>
+  <h1 class="text-center"><%= @prod.name %></h1>
   <br /><br />
   <ul>
     <% @prod.images.each do |image| %>
@@ -42,7 +42,8 @@
   </div>
 
   <div class="col-10 offset-1">
-    <h1 class="float-left">Comments</h1>
+    <h2 class="float-left">Comments</h2>
+    <br /><br />
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
       Add a comment

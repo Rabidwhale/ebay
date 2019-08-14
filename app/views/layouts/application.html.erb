@@ -15,14 +15,14 @@
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="#">Ebay Clone</a>
-
+        <%= link_to 'Ebay', root_path, class: 'navbar-brand' %>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav mr-auto mt-2 mt-md-0">
             <li class="nav-item">
+              <%= link_to 'Sell Your Stuff', new_prod_path, class: 'nav-link' %>
               <% if current_user %>
-                <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
                 <li class="nav-item">
+                  <%= link_to "Sign out", destroy_user_session_path, method: :delete %>              
                   <%= link_to 'My Profile', user_path(current_user), class: 'nav-link' %>
                 </li>
               <% else %>
@@ -50,6 +50,7 @@
         <b>Footer Here</b>
         <br />
         <%= link_to 'Link', '#' %>
+        <a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by freepik - www.freepik.com</a>
       </div>
     </div>
   </body>

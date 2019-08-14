@@ -29,6 +29,7 @@ class ProdsController < ApplicationController
 
   def index
     @prods = Prod.all
+    @prods = Prod.search(params[:term], params[:page])
   end
 
   def show

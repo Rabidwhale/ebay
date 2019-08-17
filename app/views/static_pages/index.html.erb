@@ -9,12 +9,24 @@
   </div>
 </div>
 <br />
-<div class="row featuretext-center">
+<div class="row feature text-center">
   <% @categories.each do |category| %>
     <div class="booyah-box col-12 col-sm">
       <h3><%= category.name %></h3>
       <br />
-      <%= link_to 'Check it Out', category %>
+      <%= link_to 'Check it Out', category, class: 'btn btn-outline-primary' %>
     </div>
   <% end %>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+

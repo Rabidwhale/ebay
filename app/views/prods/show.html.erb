@@ -34,23 +34,17 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <%= f.submit "Add a Comment", class: 'btn btn-primary' %>
+            <%= f.submit "Add a Comment", class: 'btn btn-outline-primary' %>
           </div>
         <% end %>
       </div>
     </div>
   </div>
 
-  <div class="col-10 offset-1">
-    <h2 class="float-left">Comments</h2>
-    <br /><br />
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-      Add a comment
-    </button>
-  </div>
-
   <div class="clear"></div>
+
+  <h2 class="text-center">Comments</h2>
+  <br /><br />
 
   <div class="row">
     <% @prod.comments.each do |comment| %>
@@ -65,29 +59,42 @@
       </div>
     <% end %>
   </div>
-  <div class="booyah-box">
-    <h2>You might also be interested in</h2>
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-      </ol>
-      <div class="carousel-inner" role="listbox">
-        <div class="carousel-item active">
-          <h3>New product</h3>
+
+  <div class="col-10 offset-1">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-outline-primary btn-lg" data-toggle="modal" data-target="#myModal">
+      Add a comment
+    </button>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <h2 class="text-center">Related Products</h2>
+      <% @related_products.each do |prod| %>
+        <div class="card">
+          <div class="row">
+            <div class="col-md-2">
+              <%= image_tag prod.default_image, width: "100%" %>
+            </div>
+            <div class="col">
+              <div class="card-body">
+                <h5 class="card-title"><%= link_to prod.name, prod %></h5>
+                <p class="card-text"><%= prod.description %></p>
+                <%= link_to 'Check it out', prod, class: "btn btn-outline-primary" %>
+                <% if prod.comments.present? %>
+                  <blockquote class="blockquote">
+                    <% if prod.comments.last.humanized_rating.present? %>
+                      <b><%= prod.comments.last.humanized_rating %></b> -
+                    <% end %>
+                    <%= prod.comments.last.message %>
+                    <small><%= prod.comments.last.user.email %></small>
+                  </blockquote>
+                <% end %>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="carousel-item">
-          <h3 class="text-center">New product</h3>
-        </div>
-      </div>
-      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
+      <% end %>
     </div>
   </div>
 </div>

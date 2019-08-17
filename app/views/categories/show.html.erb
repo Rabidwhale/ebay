@@ -2,13 +2,7 @@
   <p id="notice"><%= notice %></p>
 
   <h1 class="text-center"><%= @category.name %></h1>
-  <br />
   <h2 class="text-center">Products</h2>
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myProdModal">
-    Launch demo modal
-  </button>
-  <br />
   <br />
     <% @prods.each do |prod| %>
       <div class="card">
@@ -20,7 +14,8 @@
             <div class="card-body">
               <h5 class="card-title"><%= link_to prod.name, prod %></h5>
               <p class="card-text"><%= prod.description %></p>
-              <%= link_to 'Check it out', prod, class: "btn btn-primary" %>
+              <%= link_to 'Check it out', prod, class: "btn btn-outline-primary" %><br />
+              <br />
               <% if prod.comments.present? %>
                 <blockquote>
                   <% if prod.comments.last.humanized_rating.present? %>
@@ -30,17 +25,21 @@
                   <small><%= prod.comments.last.user.email %></small>
                 </blockquote>
               <% end %>
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-outline-primary btn-lg" data-toggle="modal" data-target="#myProdModal">
+                    Sell Your Stuff
+                  </button>
             </div>
           </div>
         </div>
       </div>
+      <br />
     <% end %>
-  <br />
-  <h2 class="text-center"><%= link_to 'Sell Your Stuff', new_prod_path %></h2>
 
     <!-- Modal -->
     <div class="modal fade" id="myProdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
+        <%= simple_form_for @prod do |f| %>
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -49,13 +48,18 @@
             <h4 class="modal-title" id="myProdModalLabel">Sell Your Stuff</h4>
           </div>
           <div class="modal-body">
-            ...
+              <%= f.input :name %>
+              <%= f.input :description %>
+              <%= f.input :cost %>
+              <%= f.input :images, input_html: { multiple: true }, as: :file %>
+              <br />
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-outline-primary">Save changes</button>
           </div>
         </div>
+        <% end %>
       </div>
     </div>
 </div>

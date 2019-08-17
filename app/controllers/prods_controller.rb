@@ -34,6 +34,7 @@ class ProdsController < ApplicationController
 
   def show
     @prod = Prod.find_by_id(params[:id])
+    @related_products = Prod.where(category_id: @prod.category_id).where.not(id: @prod.id)
     @comment = Comment.new
     if @prod.blank?
       return render_not_found if @prod.blank?

@@ -6,8 +6,9 @@
       <li><%= image_tag image.url %></li>
     <% end %>
   </ul>
+  <p>$ <%= @prod.cost %></p>
   <p><%= @prod.description %></p>
-  <h2 class="badge badge-info">Buy Now!</h2>
+  <button type="button" class="btn btn-outline-primary">buy now</button>
   <div class="float-right">
     <% if current_user && current_user == @prod.user %>
       <%= link_to 'Edit', edit_prod_path(@prod), class: 'btn btn-primary' %>
